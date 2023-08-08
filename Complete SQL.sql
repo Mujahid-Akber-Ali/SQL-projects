@@ -1,6 +1,3 @@
-SELECT * FROM employee_data.employee;
-
-/* Create Employee Table*/
 Create table Employee(
 EmpID INT,
 Emp_Name NVARCHAR(30),
@@ -9,6 +6,8 @@ EmailID NVARCHAR(30),
 PhoneNo NVARCHAR(30),
 City NVARCHAR(30)
 );
+
+SELECT * FROM employee_data.employee;
 
 /* Enter Data in Employee Table*/
 INSERT INTO employee(EmpID,Emp_Name,Age,EmailID,PhoneNo,City)VALUES(1,'Aadil',24,'Aadil@gmail.com','0313-3226755','Karachi');
@@ -19,19 +18,14 @@ INSERT INTO employee(EmpID,Emp_Name,Age,EmailID,PhoneNo,City)VALUES(5,'Areeb',24
 INSERT INTO employee(EmpID,Emp_Name,Age,EmailID,PhoneNo,City)VALUES(6,'Khushdil',28,'Khushdil@gmail.com','0215-9026755','Lahore');
 INSERT INTO employee(EmpID,Emp_Name,Age,EmailID,PhoneNo,City)VALUES(7,'Jaffer',28,'Jaffer@gmail.com','0215-23455644','Peshawar');
 
-
-SELECT * FROM employee_data.project;
-
-
-/* Create Project Table*/
 Create table Project(
 Emp_Name NVARCHAR(30),
 Emp_id INT,
 ProjectName NVARCHAR(30)
 );
 
+SELECT * FROM employee_data.project;
 
-/* Add data in Project Table*/
 INSERT INTO Project(Emp_Name,Emp_ID,ProjectName)
 VALUES('Mujahid',1,'Project1'),
 ('Akbar',2,'Project2'),
@@ -47,9 +41,9 @@ UPDATE Project
 SET Emp_Name = 'Smith', ProjectName= 'Project23'
 WHERE Emp_id = 1;
 
-/* Reset Table Values Table Values*/
+/* Again Rename Table Values*/
 UPDATE Project
-SET Emp_Name = 'Mujahid', ProjectName= 'Project2'
+SET Emp_Name = 'Mujahid', ProjectName= 'Project1'
 WHERE Emp_id = 1;
 
 
@@ -59,6 +53,7 @@ Select EmpID, EmailID from employee_data.employee;
 
 /* Select distinct from Table*/
 Select  distinct(City) from employee_data.employee;
+
 
 /* Count values*/
 select count(City) as count_of_City from employee_data.employee;
@@ -71,11 +66,14 @@ select count(distinct City) as count_of_City from employee_data.employee;
 Select * from employee_data.employee where city = 'karachi';
 Select EmailID,PhoneNo from employee_data.employee where PhoneNo = '0313-3226755';
 
+
 /* Use AND*/
 Select EmailID, PhoneNo, City from employee_data.employee where PhoneNo = '0313-3226755' AND City ='Karachi';
 
+
 /* Use OR*/
-Select EmailID, PhoneNo, City from employee_data.employee where PhoneNo = '0313-3226755' OR City ='Karachi';
+Select EmailID, PhoneNo, City from employee_data.employee where PhoneNo = '0215-9026755' OR City ='Karachi';
+
 
 /* Use NOT*/
 Select EmailID, PhoneNo, City from employee_data.employee where NOT PhoneNo = '0313-3226755' AND NOT City ='Lahore';
@@ -86,6 +84,7 @@ select * from employee_data.employee order by Age DESC; /* DESC*/
 
 /* Use GroupBy*/
 select Count(City) as City_Count,Count(PhoneNo) as Total_Numbers, City from employee_data.employee group by City; 
+
 
 /* Use Having*/
 select Count(City) as City_Count,Count(PhoneNo) as Total_Numbers, City from employee_data.employee group by City having City_Count > 1; 
@@ -105,21 +104,19 @@ select * from employee_data.employee where City Like 'k%';
 select * from employee_data.employee where City Like 'Lah%';
 select * from employee_data.employee where City Like '%chi';
 select * from employee_data.employee where City Like '%ara%';
+select * from employee_data.employee where City Like '%_r_%';
 
 /* Use Avg,Sum,Min and Max*/
 Select Avg(Age) from employee_data.employee;
 Select Max(Age) from employee_data.employee;
 Select Min(Age) from employee_data.employee;
-Select Sum(Age) from employee_data.employee;
-
+Select Sum(Age) as sum from employee_data.employee;
 
 /* Use Between*/
 Select * from employee_data.employee where age between 23 and 28;
 
 /* Use Limit*/
 Select * from employee_data.employee where age between 23 and 28 Limit 3;
-
-
 INSERT INTO employee(EmpID,Emp_Name,Age,EmailID,PhoneNo,City)VALUES(8,'Waleed',28,'Waleed@gmail.com','0231-22343','Peshawar');
 
 /* Use Join*/
@@ -134,6 +131,6 @@ on e.EmpID = p.Emp_id;
 Select * from employee_data.employee e Right join employee_data.project p
 on e.EmpID = p.Emp_id;
 
-/* Use Right Join*/
+/* Use drop Table*/
 drop table employee_data.employee;
 drop table employee_data.project;
